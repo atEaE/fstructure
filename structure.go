@@ -27,6 +27,7 @@ func (fs *FileStructure) PropagateBuildFn(fn func(FileStructure, string) error) 
 	}
 }
 
+// Build builds the file structure.
 func (fs *FileStructure) Build(parent string) error {
 	if err := validateOne(fs); err != nil {
 		return err
@@ -37,13 +38,28 @@ func (fs *FileStructure) Build(parent string) error {
 		}
 	}
 
-	if fs.IsDir {
-		parent = filepath.Join(parent, fs.Name)
+	parent = filepath.Join(parent, fs.Name)
+	if err := fs.BuildChildren(parent); err != nil {
+		return err
 	}
+	return nil
+}
+
+// BuildChildren builds the children of the file structure.
+func (fs *FileStructure) BuildChildren(parent string) error {
 	for _, child := range fs.Children {
 		if err := child.Build(parent); err != nil {
 			return err
 		}
 	}
+	return nil
+}
+
+// Append appends a child to the file structure.
+func (fs *FileStructure) Append(child FileStructure) error {
+	if !fs.IsDir {
+		return fmt.Errorf("%s is not a directory", fs.Name)
+	}
+	fs.Children = append(fs.Children, child)
 	return nil
 }
