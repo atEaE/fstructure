@@ -100,12 +100,12 @@ func TestAppend(t *testing.T) {
 				IsDir: false,
 			})
 			if err != nil {
-				t.Errorf("unexpected error: %v", err)
+				t.Fatalf("unexpected error: %v", err)
 			}
 
 			// assert
 			if len(fs.Children) != wantLen {
-				t.Errorf("unexpected number of children: want %d, got %d", wantLen, len(fs.Children))
+				t.Fatalf("unexpected number of children: want %d, got %d", wantLen, len(fs.Children))
 			}
 			if fs.Children[wantIndex].Name != wantName {
 				t.Errorf("unexpected name: want %s, got %s", wantName, fs.Children[wantIndex].Name)
@@ -126,12 +126,12 @@ func TestAppend(t *testing.T) {
 				IsDir: true,
 			})
 			if err != nil {
-				t.Errorf("unexpected error: %v", err)
+				t.Fatalf("unexpected error: %v", err)
 			}
 
 			// assert
 			if len(fs.Children) != wantLen {
-				t.Errorf("unexpected number of children: want %d, got %d", wantLen, len(fs.Children))
+				t.Fatalf("unexpected number of children: want %d, got %d", wantLen, len(fs.Children))
 			}
 			if fs.Children[wantIndex].Name != wantName {
 				t.Errorf("unexpected name: want %s, got %s", wantName, fs.Children[wantIndex].Name)
@@ -152,12 +152,12 @@ func TestAppend(t *testing.T) {
 				IsDir: false,
 			})
 			if err != nil {
-				t.Errorf("unexpected error: %v", err)
+				t.Fatalf("unexpected error: %v", err)
 			}
 
 			// assert
 			if len(fs.Children[0].Children) != wantLen {
-				t.Errorf("unexpected number of children: want %d, got %d", wantLen, len(fs.Children[0].Children))
+				t.Fatalf("unexpected number of children: want %d, got %d", wantLen, len(fs.Children[0].Children))
 			}
 			if fs.Children[0].Children[wantIndex].Name != wantName {
 				t.Errorf("unexpected name: want %s, got %s", wantName, fs.Children[0].Children[wantIndex].Name)
