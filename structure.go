@@ -54,3 +54,12 @@ func (fs *FileStructure) BuildChildren(parent string) error {
 	}
 	return nil
 }
+
+// Append appends a child to the file structure.
+func (fs *FileStructure) Append(child FileStructure) error {
+	if !fs.IsDir {
+		return fmt.Errorf("%s is not a directory", fs.Name)
+	}
+	fs.Children = append(fs.Children, child)
+	return nil
+}
